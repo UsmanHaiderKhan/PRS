@@ -47,6 +47,7 @@ body {
 
 
 #home {
+    height: 100vh;
     padding: 40px;
     background-image: url('../../Images/contact-bg.png');
     background-size: cover;
@@ -174,7 +175,7 @@ body {
 .below-line {
     line-height: 2em;
     color: #ffffff;
-    font-size: 37px;
+    font-size: 35px;
     text-align: center;
 }
 
