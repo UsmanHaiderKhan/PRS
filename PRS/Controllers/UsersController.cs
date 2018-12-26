@@ -97,7 +97,7 @@ namespace PRS.Controllers
                     {
                         string abc = uno + "_" + ++counter +
                                      file.FileName.Substring(file.FileName.LastIndexOf("."));
-                        //dont save the url of the Images Save the 
+                        //dont save the url of the Images Save the
                         string url = "~/Content/UserImages/" + abc;
                         string path = Request.MapPath(url);
                         user.ImageUrl = abc;
