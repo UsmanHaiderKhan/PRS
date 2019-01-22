@@ -33,6 +33,15 @@ namespace PRSClassesManagement.UsersManagement
                         select c).FirstOrDefault();
             }
         }
+        //public  GetUser(string email, string password)
+        //{
+        //    using (db)
+        //    {
+        //        return (from c in db.Users.Include(m => m.Role)
+        //            where c.Email.Equals(email) && c.Password.Equals(password)
+        //            select c).FirstOrDefault();
+        //    }
+        //}
         public User GetUserById(int id)
         {
 
