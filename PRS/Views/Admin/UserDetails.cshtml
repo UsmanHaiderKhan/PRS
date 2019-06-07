@@ -1,0 +1,99 @@
+﻿@using PRSClassesManagement.UsersManagement
+@model List<User>
+@{
+    /**/
+
+    ViewBag.Title = "UserDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/Bootstrap-4/css/Userdetail.css" rel="stylesheet" />
+@Html.Partial("~/Views/Admin/_DeleteUserDetails.cshtml")
+<div class="card" style="margin-left: 2%">
+    <div class="top-section">
+    </div>
+    @foreach (var v in Model)
+    {<div class="avatar">
+            <img src="~/Content/UserImages/@Url.Content(v.ImageUrl)" style="width: 200px; height: 200px" class="img-responsive" />
+        </div>
+
+
+    }
+    <div class="bottom-section">
+        @foreach (var b in Model)
+        {
+            <h3 style="font-family: fantasy">@b.UserName</h3>
+        }
+        <table class="table table-condensed table-hover table-striped table-responsive" style="float: right">
+            <thead>
+                <tr class="text-center text-white" style="background-color: #eb1768;color: aliceblue !important">
+                    <th class="text-white">FullName</th>
+                    <th class="text-white">Email</th>
+                    <th class="text-white">Password</th>
+                    <th class="text-white">ConfirmPassword</th>
+                    <th class="text-white">BirthDate</th>
+                    <th class="text-white">Roles</th>
+                    <th class="text-white">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr id="row_@u.Id">
+                        <td class="text-black">@u.UserName</td>
+                        <td class="text-black">@u.Email</td>
+                        <td class="text-black">@u.Password</td>
+                        <td class="text-black">@u.ConfirmPassword</td>
+                        <td class="text-black col-md-2">@u.DateofBirth</td>
+                        <td class="text-black ">@u.Role.Name</td>
+                        <td class="col-md-2">
+                            <a href="#exampleModal" data-toggle="modal" id="@u.Id" class="btn btn-xs btn-danger hits"><span class="fa fa-remove"></span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            <a href="@Url.Action("GetAllClients","Admin")" style="color: aliceblue" class="btn btn-block btn-pink">
+                <span class="fa fa-angle-double-left fa-lg"></span>&nbsp;&nbsp;Back to list
+            </a>
+        </div>
+        <div class="social-media" style="color: crimson">
+            <a class="fa fa-facebook"></a>
+            <a class="fa fa-google-plus" href="#"></a>
+            <a class="fa fa-twitter-square" href="#"></a>
+            <a class="fa fa-linkedin" href="#"></a>
+            <a class="fa fa-dribbble" href="#"></a>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hiddenOrderId" />
+@section myscript
+{
+    <script type="text/javascript">
+        //Delete User Details JQuery Code
+        $(function () {
+            $(".hits").click(function () {
+                var rid = $(this).attr("id");
+                alert(rid);
+                $("#hiddenOrderId").val(rid);
+                $("#modal-id").model('show');
+            });
+
+            $("#hit").click(function (event) {
+                var delRecord = $("#hiddenOrderId").val();
+                alert(delRecord);
+                $.ajax({
+
+                    url: "/Admin/DeleteUser/" + delRecord,
+                    type: "POST",
+                    data: { id: delRecord },
+                    success: function (result) {
+
+                        $("#modal-id").modal('hide');
+                        $("#row_" + delRecord).remove();
+                    }
+                });
+            });
+        });
+    </script>
+}

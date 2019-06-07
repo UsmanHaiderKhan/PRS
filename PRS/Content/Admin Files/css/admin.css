@@ -1,0 +1,17 @@
+﻿
+
+
+#main-thanks-banner {
+    background-image: url('../../Images/support-bg-img.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 130px 0;
+}
+
+.submit-text {
+    font-size: 55px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: 'Barlow', sans-serif;
+}

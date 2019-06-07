@@ -1,0 +1,51 @@
+﻿@using PRS.Models
+@model PRSClassesManagement.UsersManagement.Contact
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="about-font below-line mt-120 text-white">GET IN TOUCH</h1>
+            </div>
+        </div>
+        <div class="row mt-60">
+            <div class="col-md-6 offset-md-5">
+                <div class="media-align">
+                    <a href="#" class="link-style"><i class="text-white fab fa-twitter pr-3"></i></a>
+                    <a href="#" class="link-style"><i class="text-white fab fa-facebook-f pr-3"></i></a>
+                    <a href="#" class="link-style"><i class="text-white fab fa-linkedin pr-3"></i></a>
+                    <a href="#" class="link-style"><i class="text-white fab fa-vimeo-v pr-3"></i></a>
+                    <a href="#" class="link-style"><i class="text-white fab fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+        @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "text-center", id = "loginform", enctype = "multipart/form-data" }))
+        {
+            <div class="row justify-content-center mt-65">
+                <div class="col-md-4">
+                    <div class="md-form">
+                        @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control text-white", id = "name" })
+                        @Html.LabelFor(m => m.Name, new { @for = "name", @class = "text-white" })
+                        <div style="text-align: center"> @Html.ValidationMessageFor(m => m.Name, null, new { style = "color :red" }) </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="md-form">
+                        @Html.TextBoxFor(m => m.Email, null, new { @class = "form-control text-white", id = "email" })
+                        @Html.LabelFor(m => m.Email, new { @for = "email", @class = "text-white" })
+                        <div style="text-align: center"> @Html.ValidationMessageFor(m => m.Email, null, new { style = "color :red" }) </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="md-form">
+                        @Html.TextAreaFor(m => m.Message, new { @class = "md-textarea text-white form-control", id = "message", rows = "5" })
+                        @Html.LabelFor(m => m.Message, new { @for = "message", @class = "text-white" })
+                        <div style="text-align: center"> @Html.ValidationMessageFor(m => m.Message, null, new { style = "color :red" }) </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn send-btn mt-5 mb-5">Send</button>
+            </div>
+        }
+    </div>
+</section>

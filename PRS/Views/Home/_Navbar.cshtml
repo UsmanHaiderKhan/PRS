@@ -1,0 +1,68 @@
+﻿@using PRSClassesManagement.UsersManagement
+@{
+    User currentuser = (User)Session[WebUtils.CurrentUser];
+}
+<section id="nav-section">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container nav-setting">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <img src="../../Content/Images/logo.png" alt="Alternate Text" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active scroll" href="#home">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#about-us">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#our-work">WORK</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link scroll" href="#our-clients">CLIENTS</a>
+                        </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#service">SERVICES</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link scroll" href="#our-skill">SKILLS</a>
+                        </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#contact">CONTACT</a>
+                    </li>
+                    @if (currentuser != null)
+                    {
+
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user-circle" style="color: whitesmoke"></span>&nbsp;User Info<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link text-black-50" href="@Url.Action("index","Users",new {id=currentuser.Id})"> <span class="fa fa-user"></span>&nbsp; @currentuser.UserName</a></li>
+                                <li class="nav-item"><a class="nav-link text-black-50" href="@Url.Action("ChangePassword","Users",new{id=currentuser.Id})"><span class="fa fa-lock"></span>&nbsp; Reset Password</a></li>
+                                <li class="nav-item"><a class="nav-link text-black-50" href="@Url.Action("ProfileSetting","Users",new{id=currentuser.Id})"><span class="fa fa-cog"></span>&nbsp; Profile Setting</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li class="nav-item"><a href="@Url.Action("Logout","Users")"><span class="fa fa-sign-out-alt"></span>&nbsp; Logout</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="/Content/UserImages/@Url.Content(currentuser.ImageUrl)" style="width: 50px; height: 50px; border-radius: 50%;" class="img-thumbnail" />
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Login","Users")"><span class="fa fa-user"></span>&nbsp;Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Register","Users")"><span class="fa fa-user-plus"></span>&nbsp;Signup</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>

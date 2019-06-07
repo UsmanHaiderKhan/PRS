@@ -1,0 +1,356 @@
+﻿
+@{
+
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/fontawesome/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link href="~/Content/Bootstrap-4/css/index.css" rel="stylesheet" />
+@* ================== Nav Section ================== *@
+@Html.Partial("_Navbar")
+<section id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="mainheading animated slideInDown below-line text-uppercase">Personal Recomended System</h1>
+                <p class="text-center slider-pera-text mt-40 animated slideInUp">
+                    Your personal assistant which could help you to find products based on your personal preferences.<a href="#about-us" class="learn-more">Learn more</a>  about how it works.
+                </p>
+                <div class=" mt-100 animated pulse infinite text-center">
+                    <a href="#about-us" class="scroll">
+                        <img src="~/Content/Project Images/down_arrow.png" />
+                    </a>
+                    <div class="mb-5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@* ================== About Section ================== *@
+<div id="about-us"></div>
+<section class="mt-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 ">
+                <h1 class="about-font about-line text-center">ABOUT</h1>
+                <p class="text-center about-desc mt-70">
+                    Personal Recommender System is based on unique Machine Learning algorithms which estimate about your personal liking by reading your text messages. PRS works under tight layers of security by making your data highly encrypted which not one but you can decrypt. PRS uses this information to find products on amazon which you would definitely want to buy. Either you can tell PRS what you are in need so it will recommend you with best product if could find, or it will keep on working in background and inform you about any outstanding item it finds for you.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-about mt-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 mt-150 text-white">
+                    <h1 class="apple-font">Use Mobile Application</h1>
+                    <p class="text-white apple-desc">
+                        By using the Mobile Application you can get the Recommendations by Extracting the facts and figure from your conversation.App Use Machine Learning algorithm to know more about your personality.when ever you want to buy something it helps you to get the better product which have best match with your personality.
+                    </p>
+                    <div class="mt-60">
+                        <a href="#" class="text-white">more</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 p-5">
+                    <img src="~/Content/Project Images/apple.png" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================================================ Gallery Section =========================================== -->
+<section id="our-work" class="mt-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="about-font about-line">OUR WORK</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="row text-center justify-content-center">
+            <div class="text-center mt-70">
+                <button class="btn btn-default filter-button" data-filter="all">All</button>
+                <button class="btn btn-default filter-button" data-filter="ai">AI</button>
+                <button class="btn btn-default filter-button" data-filter="web">WEB</button>
+                <button class="btn btn-default filter-button" data-filter="app">APP</button>
+            </div>
+        </div>
+        <div class="row mt-70 loadMore">
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter ai item">
+                <img src="~/Content/WorkImages/work-1.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter ai item">
+                <img src="~/Content/WorkImages/work-2.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter ai item">
+                <img src="~/Content/WorkImages/work-3.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter item web">
+                <img src="~/Content/WorkImages/work-4.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter ai web item">
+                <img src="~/Content/WorkImages/work-5.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter web item">
+                <img src="~/Content/WorkImages/work-6.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter web item">
+                <img src="~/Content/WorkImages/work-7.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter web item">
+                <img src="~/Content/WorkImages/work-8.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter app item">
+                <img src="~/Content/WorkImages/work-9.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter web item">
+                <img src="~/Content/WorkImages/work-10.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter ai item">
+                <img src="~/Content/WorkImages/work-11.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter app item">
+                <img src="~/Content/WorkImages/work-12.png" class="img-fluid">
+            </div>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-12 filter app item">
+                <img src="~/Content/WorkImages/prs.png" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="mt-73"></div>
+    @*<div class="text-center mb-100">
+            <button class="btn view-goal text-center">VIEW MORE</button>
+        </div>*@
+</section>
+@* ========== Client section============ *@
+<section id="our-clients">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="about-font about-line mt-120">OUR CLIENTS</h1>
+            </div>
+        </div>
+        <div class="owl-carousel owl-theme mt-100">
+            <div><img src="~/Content/ClientsImages/google.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/flickr.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/pin.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/samsung.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/google.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/flickr.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/pin.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/samsung.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/google.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/flickr.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/pin.png" class="img-fluid" /></div>
+            <div><img src="~/Content/ClientsImages/samsung.png" class="img-fluid" /></div>
+        </div>
+    </div>
+    <div class="saying-banner mt-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <p class="qout-font"> " Perfection is Achived Not When There is Nothing more to Add. But When There is Nothing left to Take Away. "</p>
+                    <h2 class="float-right text-white pb-120 jon-font">- JHON DOE</h2>
+                    <div class=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="service-area" id="service">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="section-title">
+                    <h2 class="text-center">Services</h2>
+                    <p class="text-center">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae quod voluptas libero
+                        <br>
+                        atque enim tempora possimus architecto consequuntur mollitia omnis.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="service-wrap text-center">
+                    <div class="service-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Development</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, amet est. Modi temporibus
+                        ab quidem laudantium facilis iusto quos magnam assumenda? Sunt suscipit nostrum eum hic
+                        ratione, culpa et dicta?
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="service-wrap text-center">
+                    <div class="service-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>Github Support</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, amet est. Modi temporibus
+                        ab quidem laudantium facilis iusto quos magnam assumenda? Sunt suscipit nostrum eum hic
+                        ratione, culpa et dicta?
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="service-wrap text-center">
+                    <div class="service-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Python</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, amet est. Modi temporibus
+                        ab quidem laudantium facilis iusto quos magnam assumenda? Sunt suscipit nostrum eum hic
+                        ratione, culpa et dicta?
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="service-wrap text-center">
+                    <div class="service-icon">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <h3>Android</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, amet est. Modi temporibus
+                        ab quidem laudantium facilis iusto quos magnam assumenda? Sunt suscipit nostrum eum hic
+                        ratione, culpa et dicta?
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="service-wrap text-center">
+                    <div class="service-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <h3>Visual Studio</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, amet est. Modi temporibus
+                        ab quidem laudantium facilis iusto quos magnam assumenda? Sunt suscipit nostrum eum hic
+                        ratione, culpa et dicta?
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="service-wrap text-center">
+                    <div class="service-icon">
+                        <i class="fab fa-themeco"></i>
+                    </div>
+                    <h3>Responsive Themes</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, amet est. Modi temporibus
+                        ab quidem laudantium facilis iusto quos magnam assumenda? Sunt suscipit nostrum eum hic
+                        ratione, culpa et dicta?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@* ================== Price Table Content ================= *@
+@Html.Partial("_PriceTable")
+@* ================== Total Work ================= *@
+<section id="total_work" class="mt-180">
+    <div class="container" id="counter-strike">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center mt-80 ">
+                <img src="~/Content/Images/user.png" class="img-fluid " />
+                <h2 class="text-center text-white mt-48"><span class="counter-value">853</span></h2>
+                <h2 class="text-center text-white text-font">USERS</h2>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-80 text-center">
+                <img src="~/Content/Images/clock.png" class="img-fluid" />
+                <h2 class="text-center text-white mt-48"><span class="counter-value">523</span></h2>
+                <h2 class="text-center text-white text-font">HOUR WORKED</h2>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-80 text-center">
+                <img src="~/Content/Images/rocket.png" class="img-fluid" />
+                <h2 class="text-center text-white mt-48"><span class="counter-value">456</span></h2>
+                <h2 class="text-center text-white text-font">PROJECTS</h2>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-80 text-center">
+                <img src="~/Content/Images/cup.png" />
+                <h2 class="text-center text-white mt-48"><span class="counter-value">349</span></h2>
+                <h2 class="text-center text-white text-font">AWARDS</h2>
+            </div>
+        </div>
+    </div>
+</section>
+@* ---------------- Contact Section Styling ------------------- *@
+@Html.Partial("_Contact")
+@* ---------------- Contact Section Styling ------------------- *@
+<footer>
+    <div class="footer-bg-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="footer-text">&copy; 2019 copy right All the Right Reserved By PRS </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+@* ---------------- Contact Section Styling ------------------- *@
+@section myscript
+{
+    <script>
+        $(function () {
+            $('nav li a:not([href="#"])').click(function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
+        $(function () {
+            $('.count').each(function () {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+            });
+        });
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+                var value = $(this).attr('data-filter');
+
+                if (value == "all") {
+                    $('.filter').show('1000');
+                }
+                else {
+
+                    $(".filter").not('.' + value).hide('3000');
+                    $('.filter').filter('.' + value).show('3000');
+
+                }
+            });
+
+            if ($(".filter-button").removeClass("active")) {
+                $(this).removeClass("active");
+            }
+            $(this).addClass("active");
+
+        });</script>
+}

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136783306-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136783306-1');
+    </script>
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/animate.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/fontawesome/css/all.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/owl.carousel.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/owl.theme.default.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/mdb.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/index.css")" rel="stylesheet">
+</head>
+<body>
+    @*@Html.Partial("~/Views/Home/_Navbar.cshtml")*@
+    <div class="body-content">
+        @RenderBody()
+    </div>
+    @* Script Start From Here *@
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/jquery-3.3.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/owl.carousel.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/popper.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/loadMoreResults.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/smoothscroll.js")"></script>
+    <script type="text/javascript" src="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.bundle.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/filterizr/1.3.4/jquery.filterizr.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/mdb.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/scrollinToview.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/script.js")"></script>
+    @RenderSection("myscript", required: false)
+</body>
+</html>

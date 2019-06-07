@@ -1,0 +1,43 @@
+﻿@using PRSClassesManagement.UsersManagement
+@model IEnumerable<PRSClassesManagement.UsersManagement.Service>
+@{
+    List<Service> service = new ServiceHandler().GetAllServices();
+}
+@* ================== Pricing Table================= *@
+<section id="price-table" class="mt-65">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="price-text"><span class="fab fa-dollar"></span>Our Price Table</h2>
+            <p>
+                There are many variations of passages of Lorem Ipsum available,
+                but the <br />majority have suffered alteration in some form, by injected humour
+            </p>
+        </div><br />
+        <div class="row">
+            @foreach (var v in service)
+            {
+                <div class="col-sm-12 col-md-6 col-lg-4 secon media-table-mt">
+                    <div class="cards text-center">
+                        <div class="card-title">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <h2>@v.Name</h2>
+                        </div>
+                        <div class="price">
+                            <h4><sup>$</sup>@v.Price</h4>
+                        </div>
+                        <div class="options">
+                            <ul class="text-left">
+                                <li><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Basic Level Software</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Good Quality</li>
+                                <li><i class="fa fa-clock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Limited Support</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Training</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Commession</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn btn-outline-purple text-white">Order Now</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

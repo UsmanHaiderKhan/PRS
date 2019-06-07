@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PRSClassesManagement.UsersManagement.Service>
+@{
+    ViewBag.Title = "GetAllServices";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    @Html.Partial("_DeleteServices")
+    <h2>GetAllServices</h2>
+    <p>
+        @Html.ActionLink("Create New", "AddServices", new { @class = "btn btn-primary" })
+    </p>
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a href="#exampleModal" data-toggle="modal" id="@item.Id" class="btn btn-xs btn-danger hits"><span class="fa fa-remove"></span></a>
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
+<input type="hidden" id="hiddenOrderId" />
+@section myscript
+{
+    <script type="text/javascript">
+        //Delete User Details JQuery Code
+        $(function () {
+            $(".hits").click(function () {
+                var rid = $(this).attr("id");
+                alert(rid);
+                $("#hiddenOrderId").val(rid);
+                $("#modal-id").model('show');
+            });
+
+            $("#hit").click(function (event) {
+                var delRecord = $("#hiddenOrderId").val();
+                alert(delRecord);
+                $.ajax({
+
+                    url: "/Admin/DeleteServicePrice/" + delRecord,
+                    type: "POST",
+                    data: { id: delRecord },
+                    success: function (result) {
+
+                        $("#modal-id").modal('hide');
+                        $("#row_" + delRecord).remove();
+                    }
+                });
+            });
+        });</script>
+}

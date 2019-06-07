@@ -1,0 +1,136 @@
+﻿@model PRSClassesManagement.UsersManagement.User
+@{
+    /**/
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/fontawesome/css/all.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/mdb.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Bootstrap-4/css/style.css")" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="container mt-6">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                @using (Html.BeginForm("Register", "Users", FormMethod.Post, new { enctype = "multipart/form-data", @class = "border border-light p-5 box-shadow" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="md-form offset-md-3 mt-18">
+                        <div class=" mt-18 ml-4" id="fileUpldbtnContainer">
+                            <div>
+                                <img id="blah1" src="" alt="" class="img-thumbnail" style="height: 150px; width: 160px; z-index:-2 !important; position: absolute; top: 2px;border-radius:50%" />
+                            </div>
+                            <div class="fileUpload1" style="height: 150px; width: 160px;  font-size: 15px; color: rgba(0, 0, 0, 0.1); border: 2px solid rgba(0, 0, 0, 0.1);border-radius:50%">
+                                <span class="uploadFile fas fa-user fa-4x mt-26 ml-34"></span>
+                                <input id="photo" name="photo" type="file" class="upload1" style="position: absolute;left: 16px; top: 60px; margin: 0px; padding: 0px;cursor: pointer; opacity: 0;filter: alpha(opacity=0); box-sizing: content-box;z-index: 0;border-radius:50% " />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-envelope prefix"></i>
+                        @Html.TextBoxFor(m => m.Email, null, new { @class = "form-control", id = "email" })
+                        <label for="email">E-mail address</label>
+                        <div class="text-center">
+                            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-user prefix"></i>
+                        @Html.TextBoxFor(m => m.UserName, null, new { @class = "form-control", id = "username" })
+                        <label for="username">UserName</label>
+                        <div class="text-center">
+                            @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-lock prefix"></i>
+                        @Html.TextBoxFor(m => m.Password, null, new { @class = "form-control", id = "password", type = "password" })
+                        <label for="password">Password</label>
+                        <div class="text-center">
+                            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-center text-danger" })
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-lock prefix"></i>
+                        @Html.TextBoxFor(m => m.ConfirmPassword, null, new { @class = "form-control", id = "conpass", type = "password" })
+                        <label for="conpass">Confirm-Password</label>
+                        <div class="text-center">
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-center text-danger" })
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-calendar prefix"></i>
+                        @Html.TextBoxFor(m => m.DateofBirth, null, new { @class = "form-control", id = "date", type = "date" })
+                        <div class="text-center">
+                            @Html.ValidationMessageFor(model => model.DateofBirth, null, new { @class = "text-center text-danger" })
+                        </div>
+                    </div>
+                    <div class="text-center d-flex justify-content-around">
+                    </div>
+                    <button class="btn btn-outline-success btn-block my-4 toggle-disabled" disabled="disabled" type="submit">Create Account</button>
+
+                }
+                @*<p class="h4 mb-4 text-center">Personal Recomended System</p>*@
+                @*<img src="~/Content/Images/us.jpg" style="border-radius: 50%;width: 120px;height: 120px" class="img-thumbnail"/>*@
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/jquery-3.3.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/popper.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Bootstrap-4/js/mdb.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click',
+                '.fileUpload1',
+                function () {
+                    $(this).children('.upload1').change(function (event) {
+                        readURL(this);
+                        fileName = $(this).val();
+
+                    });
+                });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#blah1').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        });
+        $(document).on('change keyup',
+            '.form-control',
+            function (e) {
+                var Disabled = true;
+                $(".form-control").each(function () {
+                    var value = this.value;
+                    if ((value) && (value.trim() != '')) {
+                        Disabled = false;
+                    } else {
+                        Disabled = true;
+                        return false;
+                    }
+                });
+
+                if (Disabled) {
+                    $('.toggle-disabled').prop("disabled", true);
+                } else {
+                    $('.toggle-disabled').prop("disabled", false);
+                }
+            });
+    </script>
+</body>
+</html>

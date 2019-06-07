@@ -1,0 +1,86 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Container fluid  -->
+<div class="container-fluid mt-6">
+    <!-- Start Page Content -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-primary p-20">
+                <div class="media widget-ten">
+                    <div class="media-left meida media-middle">
+                        <span><i class="ti-user f-s-40"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2 class="color-white">@Html.Action("GetUserByCount", "Admin")</h2>
+                        <p class="m-b-0">New Clients</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-pink p-20">
+                <div class="media widget-ten">
+                    <div class="media-left meida media-middle">
+                        <span><i class="ti-comment f-s-40"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2 class="color-white">@Html.Action("GetMessageCount", "Admin")</h2>
+                        <p class="m-b-0">New Comment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success p-20">
+                <div class="media widget-ten">
+                    <div class="media-left meida media-middle">
+                        <span><i class="ti-envelope f-s-40"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2 class="color-white">@Html.Action("GetMessageCount", "Admin")</h2>
+                        <p class="m-b-0">New Email</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger p-20">
+                <div class="media widget-ten">
+                    <div class="media-left meida media-middle">
+                        <span><i class="ti-settings f-s-40"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2 class="color-white">@Html.Action("TotalServices", "Admin")</h2>
+                        <p class="m-b-0">Our Services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /# row -->
+<!-- End PAge Content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6  mt-5">
+            <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7gRsHcVpnsJ_NrtjeqqSjEm6feGwsRPkl1gHhTcGd0IRXmP3omAeI4H_n8pfrNsvq9E-LpkIubi7r/pubchart?oid=1431138347&amp;format=interactive"></iframe>
+        </div>
+        <div class="col-md-6  mt-5">
+            <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7gRsHcVpnsJ_NrtjeqqSjEm6feGwsRPkl1gHhTcGd0IRXmP3omAeI4H_n8pfrNsvq9E-LpkIubi7r/pubchart?oid=791598581&amp;format=interactive"></iframe>
+        </div>
+        <div class="col-md-6 mt-5">
+            <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7gRsHcVpnsJ_NrtjeqqSjEm6feGwsRPkl1gHhTcGd0IRXmP3omAeI4H_n8pfrNsvq9E-LpkIubi7r/pubchart?oid=696456402&amp;format=interactive"></iframe>
+        </div>
+        <div class="col-md-6  mt-5">
+            <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7gRsHcVpnsJ_NrtjeqqSjEm6feGwsRPkl1gHhTcGd0IRXmP3omAeI4H_n8pfrNsvq9E-LpkIubi7r/pubchart?oid=36891021&amp;format=interactive"></iframe>
+        </div>
+    </div>
+</div>
+@section myscript
+{
+}

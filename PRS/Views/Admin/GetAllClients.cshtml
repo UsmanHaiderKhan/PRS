@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PRSClassesManagement.UsersManagement.User>
+@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "GetAllClients";
+                Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/Bootstrap-4/css/UserCard.css" rel="stylesheet" />
+<div class="container">
+    <div class="row mt-6">
+        @foreach (var v in Model)
+        {
+
+            <div class="col-md-4 col-sm-6">
+                <div class="our-team">
+                    <div class="pic">
+                        <img src="~/Content/UserImages/@Url.Content(v.ImageUrl)" alt="">
+                    </div>
+                    <div class="team-content">
+                        <h3 class="mytitle">@v.UserName</h3>
+                        <span class="post"><a href="@Url.Action("UserDetails", "Admin", new {id = v.Id})" id="aaa" class="btn-pink">View Detail&nbsp;&nbsp;<span class="fa fa-eye"></span></a></span>
+                    </div>
+                    <ul class="social">
+                        <li><a href="" class="fa fa-facebook"></a></li>
+                        <li><a href="" class="fa fa-google-plus"></a></li>
+                        <li><a href="" class="fa fa-twitter"></a></li>
+                        <li><a href="" class="fa fa-linkedin"></a></li>
+                        <li><a href="" class="fa fa-instagram"></a></li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
