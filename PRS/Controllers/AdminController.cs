@@ -9,7 +9,6 @@ namespace PRS.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
         public ActionResult Index()
         {
             return View();
@@ -24,6 +23,7 @@ namespace PRS.Controllers
             List<User> u = h.GetUsers();
             return View(u);
         }
+
         public ActionResult UserDetails(int id)
         {
             User user1 = (User)Session[WebUtils.CurrentUser];
@@ -37,6 +37,7 @@ namespace PRS.Controllers
             List<User> u = user.GetUsersById(id);
             return View(u);
         }
+
         public ActionResult DeleteUser(int id)
         {
             UserHandler user = new UserHandler();
@@ -52,6 +53,7 @@ namespace PRS.Controllers
             List<Contact> contacts = contactHandler.GetAllContactsList();
             return View(contacts);
         }
+
         public ActionResult DeleteMessage(int id)
         {
             ContactHandler contactHandler = new ContactHandler();
@@ -65,6 +67,7 @@ namespace PRS.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult AddServices(Service service)
         {
@@ -88,11 +91,10 @@ namespace PRS.Controllers
                 throw;
             }
 
-
             return View();
         }
-        [HttpGet]
 
+        [HttpGet]
         public ActionResult GetAllServices()
         {
             try
@@ -109,6 +111,7 @@ namespace PRS.Controllers
             }
 
         }
+
         public ActionResult DeleteServicePrice(int id)
         {
             ServiceHandler serviceHandler = new ServiceHandler();
@@ -121,6 +124,7 @@ namespace PRS.Controllers
         {
             return View();
         }
+
         public int TotalServices()
         {
             PRSContext db = new PRSContext();
@@ -128,8 +132,8 @@ namespace PRS.Controllers
             {
                 return (from c in db.Services select c).Count();
             }
-
         }
+
         public int GetUserByCount()
         {
             PRSContext db = new PRSContext();
@@ -138,6 +142,7 @@ namespace PRS.Controllers
                 return (from a in db.Users select a).Count();
             }
         }
+
         public int GetMessageCount()
         {
             PRSContext db = new PRSContext();
@@ -153,9 +158,5 @@ namespace PRS.Controllers
         //    int count = hc.GetUserByCount();
         //    return RedirectToAction("Index", "Admin", count);
         //}
-
-
-
-
     }
 }

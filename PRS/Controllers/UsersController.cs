@@ -3,6 +3,7 @@ using PRSClassesManagement;
 using PRSClassesManagement.UsersManagement;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Net.Mail;
 using System.Web;
@@ -12,12 +13,12 @@ namespace PRS.Controllers
 {
     public class UsersController : Controller
     {
-        // GET: Users
         public ActionResult Index(int id)
         {
             User user = new UserHandler().GetUserById(id);
             return View(user);
         }
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -26,15 +27,15 @@ namespace PRS.Controllers
             {
                 User user = new UserHandler().GetUser(myCookie.Values["logid"], myCookie.Values["psd"]);
                 if (user != null)
-                {
-                    myCookie.Expires = DateTime.Now.AddDays(7);
                     Session.Add(WebUtils.CurrentUser, user);
-                }
+                else
+                    myCookie.Expires = DateTime.Now;
             }
             ViewBag.Controller = Request.QueryString["ctl"];
             ViewBag.Action = Request.QueryString["act"];
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(LoginViewModel viewModel)
         {
@@ -42,17 +43,18 @@ namespace PRS.Controllers
             {
                 return View();
             }
-            User u = new UserHandler().GetUser(viewModel.Email, viewModel.Password);
+            User u = new UserHandler().GetUser(viewModel.Email, Sha256(viewModel.Password));
             if (u != null)
             {
+                HttpCookie cookie = new HttpCookie("logsec");
+                cookie.Values.Add("logid", u.UserName);
+                cookie.Values.Add("psd", u.Password);
+
                 if (viewModel.RememberMe)
                 {
-                    HttpCookie cookie = new HttpCookie("logsec");
                     cookie.Expires = DateTime.Now.AddDays(7);
-                    cookie.Values.Add("logid", u.UserName);
-                    cookie.Values.Add("psd", u.Password);
-                    Response.SetCookie(cookie);
                 }
+                Response.SetCookie(cookie);
                 Session.Add(WebUtils.CurrentUser, u);
                 string ctl = Request.QueryString["c"];
                 string act = Request.QueryString["a"];
@@ -73,11 +75,13 @@ namespace PRS.Controllers
             }
             return View();
         }
+
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User user)
@@ -101,6 +105,8 @@ namespace PRS.Controllers
                     }
                 }
                 user.Role = new Role { Id = 2 };
+                user.Password = Sha256(user.Password);
+                user.ConfirmPassword = Sha256(user.ConfirmPassword);
                 PRSContext db = new PRSContext();
                 using (db)
                 {
@@ -110,13 +116,29 @@ namespace PRS.Controllers
                 }
                 return RedirectToAction("Login");
             }
-            catch (Exception e)
+            catch (DbEntityValidationException e)
             {
-                Console.WriteLine(e);
+#if DEBUG
+                string text = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    text = String.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:{2}", eve.Entry.Entity.GetType().Name, eve.Entry.State, Environment.NewLine);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        text = String.Format("{0}{0}- Property: \"{1}\", Error: \"{2}\"", Environment.NewLine, ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                return Content(text);
+#endif
                 throw;
             }
-
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+                throw;
+            }
         }
+
         [HttpGet]
         public ActionResult PasswordRecovery()
         {
@@ -135,8 +157,8 @@ namespace PRS.Controllers
                     User user = new UserHandler().GetUserByEmail(data.email);
                     var sub = user.UserName + " Password Recovered";
                     string c = Path.GetRandomFileName().Replace(".", "");
-                    user.Password = Convert.ToString(c);
-                    user.ConfirmPassword = Convert.ToString(c);
+                    user.Password = Sha256(Convert.ToString(c));
+                    user.ConfirmPassword = user.Password;
                     var message = new MailMessage();
                     message.To.Add(new MailAddress(data.email));
                     message.Subject = "Reply For The Password Recovery From Personal Recomended System";
@@ -166,6 +188,7 @@ namespace PRS.Controllers
             User u = new UserHandler().GetUserById(id);
             return View(u);
         }
+
         [HttpPost]
         public ActionResult ProfileSetting(User u)
         {
@@ -175,6 +198,10 @@ namespace PRS.Controllers
             {
                 using (db)
                 {
+                    if (!string.IsNullOrEmpty(u.Password)) u.Password = Sha256(u.Password);
+                    if (!string.IsNullOrEmpty(u.ConfirmPassword)) u.ConfirmPassword = Sha256(u.ConfirmPassword);
+                    if (u.ImageUrl.Contains("user-circle.png")) u.ImageUrl = new UserHandler().GetUserById(u.Id).ImageUrl;
+
                     db.Entry(u).State = EntityState.Modified;
                     db.SaveChanges();
                     Session.Add(WebUtils.CurrentUser, new UserHandler().GetUserById(u.Id));
@@ -182,12 +209,14 @@ namespace PRS.Controllers
             }
             return RedirectToAction("ProfileSetting", "Users");
         }
+
         [HttpGet]
         public ActionResult ChangePassword(int id)
         {
             ViewBag.userId = id;
             return View();
         }
+
         [HttpPost]
         public ActionResult ChangePassword(FormCollection formdata, int id)
         {
@@ -197,9 +226,8 @@ namespace PRS.Controllers
                 User user = db.Users.Find(id);
                 if (user != null)
                 {
-
-                    user.Password = formdata["Password"];
-                    user.ConfirmPassword = formdata["ConfirmPassword"];
+                    user.Password = Sha256(formdata["Password"]);
+                    user.ConfirmPassword = user.Password;
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("login", "Users");
@@ -207,7 +235,6 @@ namespace PRS.Controllers
             }
             return View();
         }
-
 
         public ActionResult Logout()
         {
@@ -222,5 +249,16 @@ namespace PRS.Controllers
             return RedirectToAction("Login");
         }
 
+        private static string Sha256(string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(System.Text.Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
     }
 }

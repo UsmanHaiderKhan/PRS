@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row mt-100">
         <div class="col-lg-4">
-            <div style="margin-top: 7%; padding: 0; width: 221px;">
+            <div style="margin-top: 7%; padding: 0; width: 250px;">
                 <div class="text-center">
                     <img id="blah" src="~/Content/UserImages/@Url.Content(Model.ImageUrl)" alt="" class="img-thumbnail" style="height: 250px; width: 250px; top: 2px;" />
                     <h4 class="mt-2" style="font-family:Roboto, sans-serif"> @Html.DisplayFor(model => model.UserName)</h4>
@@ -21,19 +21,13 @@
         <br />
         <div class="col-lg-4 mt-4">
             <div class="form-group">
-                @Html.LabelFor(model => model.UserName)&nbsp;:&nbsp;@Html.DisplayFor(model => model.UserName, new { @class = "mk" })
+                @Html.LabelFor(model => model.UserName, "Username")&nbsp;:&nbsp;@Html.DisplayFor(model => model.UserName, new { @class = "mk" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Email)&nbsp;:&nbsp;@Html.DisplayFor(model => model.Email, new { @class = "mk" })
+                @Html.LabelFor(model => model.Email, "Email Address")&nbsp;:&nbsp;@Html.DisplayFor(model => model.Email, new { @class = "mk" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Password)&nbsp;:&nbsp;@Html.DisplayFor(model => model.Password, new { @class = "mk" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfirmPassword)&nbsp;:&nbsp;@Html.DisplayFor(model => model.ConfirmPassword, new { @class = "mk" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.DateofBirth)&nbsp;:&nbsp;@Html.DisplayFor(model => model.DateofBirth, new { @class = "mk" })
+                @Html.LabelFor(model => model.DateofBirth, "Date of Birth")&nbsp;:&nbsp;@Html.DisplayFor(model => model.DateofBirth, new { @class = "mk" })
             </div>
         </div>
     </div>

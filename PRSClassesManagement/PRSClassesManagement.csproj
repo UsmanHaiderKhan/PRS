@@ -59,6 +59,18 @@
     <Compile Include="Migrations\201906061812595_PopulateRoles.Designer.cs">
       <DependentUpon>201906061812595_PopulateRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906081546261_Created Tokens Model.cs" />
+    <Compile Include="Migrations\201906081546261_Created Tokens Model.Designer.cs">
+      <DependentUpon>201906081546261_Created Tokens Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906081553420_Updated Users Table.cs" />
+    <Compile Include="Migrations\201906081553420_Updated Users Table.Designer.cs">
+      <DependentUpon>201906081553420_Updated Users Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906081927012_Removed ConfirmPassword column from Users table.cs" />
+    <Compile Include="Migrations\201906081927012_Removed ConfirmPassword column from Users table.Designer.cs">
+      <DependentUpon>201906081927012_Removed ConfirmPassword column from Users table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PRSContext.cs" />
@@ -68,6 +80,7 @@
     <Compile Include="UsersManagement\Role.cs" />
     <Compile Include="UsersManagement\Service.cs" />
     <Compile Include="UsersManagement\ServiceHandler.cs" />
+    <Compile Include="UsersManagement\Token.cs" />
     <Compile Include="UsersManagement\User.cs" />
     <Compile Include="UsersManagement\UserHandler.cs" />
   </ItemGroup>
@@ -84,6 +97,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906061812595_PopulateRoles.resx">
       <DependentUpon>201906061812595_PopulateRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906081546261_Created Tokens Model.resx">
+      <DependentUpon>201906081546261_Created Tokens Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906081553420_Updated Users Table.resx">
+      <DependentUpon>201906081553420_Updated Users Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906081927012_Removed ConfirmPassword column from Users table.resx">
+      <DependentUpon>201906081927012_Removed ConfirmPassword column from Users table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,5 +13,6 @@ namespace PRSClassesManagement
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Token> Tokens { get; set; }
     }
 }

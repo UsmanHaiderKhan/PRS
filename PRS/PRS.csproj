@@ -2304,6 +2304,7 @@
     <Content Include="Content\Images\rocket.png" />
     <Content Include="Content\Images\support-bg-img.png" />
     <Content Include="Content\Images\us.jpg" />
+    <Content Include="Content\Images\user-circle.png" />
     <Content Include="Content\Images\user.png" />
     <Content Include="Content\Project Images\apple.png" />
     <Content Include="Content\Project Images\bg-banner.png" />

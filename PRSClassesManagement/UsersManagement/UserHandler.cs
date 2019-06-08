@@ -73,10 +73,7 @@ namespace PRSClassesManagement.UsersManagement
 
                 Role u = db.Roles.Find(id);
                 return u;
-
-
             }
         }
-
     }
 }
