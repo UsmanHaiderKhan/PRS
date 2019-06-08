@@ -14,7 +14,6 @@ namespace PRS.Controllers
             return View();
         }
 
-
         public ActionResult Contact(Contact contact)
         {
             if (!ModelState.IsValid)
