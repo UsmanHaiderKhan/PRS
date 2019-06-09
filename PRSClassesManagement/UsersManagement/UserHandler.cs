@@ -7,6 +7,15 @@ namespace PRSClassesManagement.UsersManagement
     public class UserHandler
     {
         PRSContext db = new PRSContext();
+
+        public bool AdminExists()
+        {
+            using (db)
+            {
+                return db.Users.Where(c => c.Role.Id == 1).Count() > 0;
+            }
+        }
+
         public List<User> GetUsers()
         {
             using (db)

@@ -104,7 +104,10 @@ namespace PRS.Controllers
                         file.SaveAs(path);
                     }
                 }
-                user.Role = new Role { Id = 2 };
+                if (new UserHandler().AdminExists())
+                    user.Role = new Role { Id = 2 };
+                else
+                    user.Role = new Role { Id = 1 };
                 user.Password = Sha256(user.Password);
                 user.ConfirmPassword = Sha256(user.ConfirmPassword);
                 PRSContext db = new PRSContext();
@@ -152,17 +155,18 @@ namespace PRS.Controllers
             {
                 PRSContext db = new PRSContext();
                 if (ModelState.IsValid)
-
                 {
                     User user = new UserHandler().GetUserByEmail(data.email);
-                    var sub = user.UserName + " Password Recovered";
                     string c = Path.GetRandomFileName().Replace(".", "");
                     user.Password = Sha256(Convert.ToString(c));
                     user.ConfirmPassword = user.Password;
                     var message = new MailMessage();
                     message.To.Add(new MailAddress(data.email));
-                    message.Subject = "Reply For The Password Recovery From Personal Recomended System";
-                    message.Body = $"Dear:{sub} Please Login next time with This Given Password:" + c;
+                    message.Subject = "Your new password for PRS";
+                    message.Body = $"Dear {user.UserName}\n" +
+                        $"You password have been changed. Your new password is: {c}\n" +
+                        $"Please change your password after logging in.\n" +
+                        $"Thanks";
                     message.IsBodyHtml = false;
                     using (var smtp = new SmtpClient())
                     {
@@ -174,9 +178,9 @@ namespace PRS.Controllers
                     return View();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                ViewBag.Error = "Error Sending Email.  Try Again Later.Ooop's";
+                ViewBag.Error = "Error Sending Email. Try Again Later.";
             }
 
             return View();
