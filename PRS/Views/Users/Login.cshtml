@@ -15,6 +15,18 @@
 <body>
     <div class="container" style="margin-top: 8rem">
         <div class="row">
+            <div class="col-md-8 mx-auto">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong style="font-family: sans-serif; font-weight: 700;font-size: 18px">Error!</strong>
+                        <b>@ViewBag.Error</b>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-8 offset-md-2">
                 @using (Html.BeginForm("Login", "Users", new { c = ViewBag.Controller, a = ViewBag.Action }, FormMethod.Post, new { id = "loginform", enctype = "plain/text", @class = "border border-light p-5 box-shadow" }))
                 {
@@ -43,7 +55,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="@Url.Action("PasswordRecovery","Users")">Forgot password...?</a>
+                            <a href="@Url.Action("PasswordRecovery", "Users")">Forgot password...?</a>
                         </div>
                     </div>
                     <div class="mt-4 mb-4">
@@ -51,7 +63,7 @@
                     </div>
                     <p class="text-center">
                         Not a member?
-                        <a href="@Url.Action("Register","Users")">Register Your Self...!</a>
+                        <a href="@Url.Action("Register", "Users")">Register Your Self...!</a>
                     </p>
                     <!-- Social login -->
                     <div class="row">
@@ -79,24 +91,26 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
     <script type="text/javascript">
-        $(document).on('change keyup', '.form-control', function (e) {
-            var Disabled = true;
-            $(".form-control").each(function () {
-                var value = this.value;
-                if ((value) && (value.trim() != '')) {
-                    Disabled = false;
-                } else {
-                    Disabled = true;
-                    return false;
-                }
-            });
+        $(document).on('change keyup',
+            '.form-control',
+            function (e) {
+                var Disabled = true;
+                $(".form-control").each(function () {
+                    var value = this.value;
+                    if ((value) && (value.trim() != '')) {
+                        Disabled = false;
+                    } else {
+                        Disabled = true;
+                        return false;
+                    }
+                });
 
-            if (Disabled) {
-                $('.toggle-disabled').prop("disabled", true);
-            } else {
-                $('.toggle-disabled').prop("disabled", false);
-            }
-        })
+                if (Disabled) {
+                    $('.toggle-disabled').prop("disabled", true);
+                } else {
+                    $('.toggle-disabled').prop("disabled", false);
+                }
+            })
 
     </script>
 </body>
