@@ -197,7 +197,8 @@ namespace PRS.Controllers
         public ActionResult ProfileSetting(User u)
         {
             PRSContext db = new PRSContext();
-
+            // constr no
+            // "constr" yes
             if (ModelState.IsValid)
             {
                 using (db)

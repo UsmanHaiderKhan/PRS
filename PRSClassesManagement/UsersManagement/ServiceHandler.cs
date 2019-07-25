@@ -15,6 +15,7 @@ namespace PRSClassesManagement.UsersManagement
                 try
                 {
                     _db.Database.CreateIfNotExists();
+                    
                 }
                 catch (SqlException e)
                 {

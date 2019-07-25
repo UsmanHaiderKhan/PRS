@@ -1,0 +1,4 @@
+@ECHO OFF
+
+echo Running migrations on constr2 connection string. Make sure that the DB is created and is empty.
+Update-Database -ConnectionStringName constr2
