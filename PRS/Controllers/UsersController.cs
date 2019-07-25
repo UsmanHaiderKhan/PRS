@@ -8,6 +8,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using PRS.Helpers;
 
 namespace PRS.Controllers
 {
@@ -43,7 +44,7 @@ namespace PRS.Controllers
             {
                 return View();
             }
-            User u = new UserHandler().GetUser(viewModel.Email, Sha256(viewModel.Password));
+            User u = new UserHandler().GetUser(viewModel.Email, HelperMethods.Sha256(viewModel.Password));
             if (u != null)
             {
                 HttpCookie cookie = new HttpCookie("logsec");
@@ -108,8 +109,8 @@ namespace PRS.Controllers
                     user.Role = new Role { Id = 2 };
                 else
                     user.Role = new Role { Id = 1 };
-                user.Password = Sha256(user.Password);
-                user.ConfirmPassword = Sha256(user.ConfirmPassword);
+                user.Password = HelperMethods.Sha256(user.Password);
+                user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
                 PRSContext db = new PRSContext();
                 using (db)
                 {
@@ -158,7 +159,7 @@ namespace PRS.Controllers
                 {
                     User user = new UserHandler().GetUserByEmail(data.email);
                     string c = Path.GetRandomFileName().Replace(".", "");
-                    user.Password = Sha256(Convert.ToString(c));
+                    user.Password = HelperMethods.Sha256(Convert.ToString(c));
                     user.ConfirmPassword = user.Password;
                     var message = new MailMessage();
                     message.To.Add(new MailAddress(data.email));
@@ -197,14 +198,13 @@ namespace PRS.Controllers
         public ActionResult ProfileSetting(User u)
         {
             PRSContext db = new PRSContext();
-            // constr no
-            // "constr" yes
+            
             if (ModelState.IsValid)
             {
                 using (db)
                 {
-                    if (!string.IsNullOrEmpty(u.Password)) u.Password = Sha256(u.Password);
-                    if (!string.IsNullOrEmpty(u.ConfirmPassword)) u.ConfirmPassword = Sha256(u.ConfirmPassword);
+                    if (!string.IsNullOrEmpty(u.Password)) u.Password = HelperMethods.Sha256(u.Password);
+                    if (!string.IsNullOrEmpty(u.ConfirmPassword)) u.ConfirmPassword = HelperMethods.Sha256(u.ConfirmPassword);
                     if (u.ImageUrl.Contains("user-circle.png")) u.ImageUrl = new UserHandler().GetUserById(u.Id).ImageUrl;
 
                     db.Entry(u).State = EntityState.Modified;
@@ -231,7 +231,7 @@ namespace PRS.Controllers
                 User user = db.Users.Find(id);
                 if (user != null)
                 {
-                    user.Password = Sha256(formdata["Password"]);
+                    user.Password = HelperMethods.Sha256(formdata["Password"]);
                     user.ConfirmPassword = user.Password;
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
@@ -252,18 +252,6 @@ namespace PRS.Controllers
             }
 
             return RedirectToAction("Login");
-        }
-
-        private static string Sha256(string randomString)
-        {
-            var crypt = new System.Security.Cryptography.SHA256Managed();
-            var hash = new System.Text.StringBuilder();
-            byte[] crypto = crypt.ComputeHash(System.Text.Encoding.UTF8.GetBytes(randomString));
-            foreach (byte theByte in crypto)
-            {
-                hash.Append(theByte.ToString("x2"));
-            }
-            return hash.ToString();
         }
     }
 }
