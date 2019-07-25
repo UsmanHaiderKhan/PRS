@@ -1,4 +1,5 @@
-﻿using PRSClassesManagement;
+﻿using PRS.Helpers;
+using PRSClassesManagement;
 using PRSClassesManagement.UsersManagement;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -43,6 +44,9 @@ namespace PRS.Controllers.API
                 return BadRequest(ModelState);
             }
 
+            if (user == null)
+                return BadRequest();
+
             if (id != user.Id)
             {
                 return BadRequest();
@@ -70,7 +74,7 @@ namespace PRS.Controllers.API
         }
 
         // POST: api/Users
-
+        // DateofBirth should be in format: yyyy-MM-dd
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
@@ -79,7 +83,12 @@ namespace PRS.Controllers.API
                 return BadRequest(ModelState);
             }
 
+            if (user == null)
+                return BadRequest();
+
             user.Role = new UserHandler().GetRoleById(2);
+            user.Password = HelperMethods.Sha256(user.Password);
+            user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
             db.Users.Add(user);
             db.SaveChanges();
 

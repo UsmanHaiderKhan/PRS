@@ -15,6 +15,14 @@ namespace PRS.Controllers.API
         [HttpPost]        
         public IHttpActionResult GetDataFromUser(LoginViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (vm == null)
+                return BadRequest();
+
             User user = new UserHandler().GetUser(vm.Email, HelperMethods.Sha256(vm.Password));
             if (user != null)
             {

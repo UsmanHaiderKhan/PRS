@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-    <!--Nested Pie echarts init-->
+    //<!--Nested Pie echarts init-->
 
     var dom = document.getElementById("np-Pie");
     var npChart = echarts.init(dom);
@@ -78,7 +78,7 @@ $(document).ready(function() {
         npChart.setOption(option, false);
     }
 
-    <!--Rainfall and Evaporation echarts init-->
+    //<!--Rainfall and Evaporation echarts init-->
 
     var dom = document.getElementById("rainfall");
     var rainChart = echarts.init(dom);
