@@ -178,7 +178,7 @@ namespace PRS.Controllers
                     return View();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.Error = "Error Sending Email. Try Again Later.";
             }

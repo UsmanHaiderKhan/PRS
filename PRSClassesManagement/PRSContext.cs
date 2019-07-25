@@ -5,7 +5,8 @@ namespace PRSClassesManagement
 {
     public class PRSContext : DbContext
     {
-        public PRSContext() : base("constr")
+        public static string ConnectionToUse { get; set; } = "constr";
+        public PRSContext() : base(ConnectionToUse)
         {
             Configuration.LazyLoadingEnabled = false;
         }

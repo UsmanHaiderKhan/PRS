@@ -1,11 +1,39 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace PRSClassesManagement.UsersManagement
 {
     public class ServiceHandler
     {
-        PRSContext db = new PRSContext();
+        private PRSContext _db { get; set; } // placeholder for db variable
+        private PRSContext db
+        {
+            get => _db;
+            set {
+                _db = value;
+                try
+                {
+                    _db.Database.CreateIfNotExists();
+                }
+                catch (SqlException e)
+                {
+                    if (PRSContext.ConnectionToUse.Equals("constr"))
+                    {
+                        PRSContext.ConnectionToUse = "constr2"; // change to constr2
+                        _db = new PRSContext();
+                    }
+                    else
+                        throw e;
+                }
+            }
+        }
+
+        public ServiceHandler()
+        {
+            db = new PRSContext();
+        }
+
         public List<Service> GetAllServices()
         {
             using (db)
