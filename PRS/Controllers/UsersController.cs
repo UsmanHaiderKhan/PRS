@@ -106,9 +106,9 @@ namespace PRS.Controllers
                     }
                 }
                 if (new UserHandler().AdminExists())
-                    user.Role = new Role { Id = 2 };
+                    user.Role = new UserHandler().GetRoleById(2);
                 else
-                    user.Role = new Role { Id = 1 };
+                    user.Role = new UserHandler().GetRoleById(2);
                 user.Password = HelperMethods.Sha256(user.Password);
                 user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
                 PRSContext db = PRSContext.GetInstance();
@@ -122,7 +122,6 @@ namespace PRS.Controllers
             }
             catch (DbEntityValidationException e)
             {
-#if DEBUG
                 string text = "";
                 foreach (var eve in e.EntityValidationErrors)
                 {
@@ -133,8 +132,6 @@ namespace PRS.Controllers
                     }
                 }
                 return Content(text);
-#endif
-                throw;
             }
             catch (Exception e)
             {
