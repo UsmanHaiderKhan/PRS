@@ -4,7 +4,6 @@ namespace PRSClassesManagement.UsersManagement
 {
     public class Service
     {
-
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }

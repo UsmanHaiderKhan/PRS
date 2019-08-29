@@ -1,6 +1,6 @@
-﻿using PRS.Helpers;
-using PRS.Models;
+﻿using PRS.Models;
 using PRSClassesManagement;
+using PRSClassesManagement.Helpers;
 using PRSClassesManagement.UsersManagement;
 using System.Linq;
 using System.Web.Http;

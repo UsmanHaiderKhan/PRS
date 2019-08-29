@@ -5,18 +5,13 @@ namespace PRSClassesManagement.UsersManagement
 {
     public class ServiceHandler
     {
-        private PRSContext db;
-
-        public ServiceHandler()
-        {
-            db = PRSContext.GetInstance();
-        }
+        private PRSContext db = PRSContext.GetInstance();
 
         public List<Service> GetAllServices()
         {
             using (db)
             {
-                return (from c in db.Services select c).ToList();
+                return db.Services.ToList();
             }
         }
 

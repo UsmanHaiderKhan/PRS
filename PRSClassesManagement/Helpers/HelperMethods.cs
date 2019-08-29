@@ -1,4 +1,4 @@
-﻿namespace PRS.Helpers
+﻿namespace PRSClassesManagement.Helpers
 {
     public class HelperMethods
     {

@@ -1,5 +1,5 @@
-﻿using PRS.Helpers;
-using PRSClassesManagement;
+﻿using PRSClassesManagement;
+using PRSClassesManagement.Helpers;
 using PRSClassesManagement.UsersManagement;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
