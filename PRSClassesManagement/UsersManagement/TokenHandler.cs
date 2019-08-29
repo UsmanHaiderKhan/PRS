@@ -9,13 +9,13 @@ namespace PRSClassesManagement.UsersManagement
     {
         private PRSContext db = PRSContext.GetInstance();
 
-        public Token GenerateToken(User user)
+        public Token GenerateToken(User user, bool rememberMe = true)
         {
             var token = new Token()
             {
                 User = user,
                 Key = HelperMethods.Sha256((user.Id + DateTime.Now.Ticks).ToString()),
-                ExpiryDT = DateTime.Now
+                ExpiryDT = rememberMe ? DateTime.Now.AddDays(7) : DateTime.Now.AddHours(1)
             };
             db.Tokens.Add(token);
             db.SaveChanges();
