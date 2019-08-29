@@ -2,7 +2,6 @@
 using PRSClassesManagement;
 using PRSClassesManagement.Helpers;
 using PRSClassesManagement.UsersManagement;
-using System.Linq;
 using System.Web.Http;
 
 namespace PRS.Controllers.API
@@ -26,7 +25,7 @@ namespace PRS.Controllers.API
             User user = new UserHandler().GetUser(vm.Email, HelperMethods.Sha256(vm.Password));
             if (user != null)
             {
-                return Ok(user);
+                return Ok(new TokenHandler().GenerateToken(user, vm.RememberMe).Key); // Generate token and return key
             }
             else
             {
@@ -34,9 +33,13 @@ namespace PRS.Controllers.API
             }
         }
 
-        private bool UserExists(int id)
+        protected override void Dispose(bool disposing)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

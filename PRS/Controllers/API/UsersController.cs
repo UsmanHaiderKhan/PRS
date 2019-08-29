@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -17,23 +18,43 @@ namespace PRS.Controllers.API
         // GET: api/Users
         public IQueryable<User> GetUsers()
         {
-            return db.Users;
+            var r = Request;
+            string key = r.Headers.Contains("key") ? r.Headers.GetValues("key").First() : "";
+
+            if (string.IsNullOrEmpty(key))
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest) { Content = new StringContent("Access key is required!") });
+
+            if (new TokenHandler().IsTokenValidAdmin(key)) // Only admin can get all users
+                return db.Users;
+            else
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Unauthorized));
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
-            var re = Request;
-            if (re.Headers.Contains("key"))
-                return Json(re.Headers.GetValues("key").First());
+            var r = Request;
+            var th = new TokenHandler();
+            string key = r.Headers.Contains("key") ? r.Headers.GetValues("key").First() : "";
             User user = db.Users.Find(id);
+
+            if (string.IsNullOrEmpty(key))
+                return BadRequest("Access key is required!");
+
+            var token = th.GetValidToken(key);
+
             if (user == null)
             {
-                return NotFound();
+                if (th.IsTokenValidAdmin(key))
+                    return NotFound();
+            }
+            else if (th.IsTokenValidAdmin(key) || (token != null && token.User.Id == user.Id))
+            {
+                return Ok(user);
             }
 
-            return Ok(user);
+            return Unauthorized();
         }
 
         // PUT: api/Users/5
@@ -41,37 +62,39 @@ namespace PRS.Controllers.API
         public IHttpActionResult PutUser(int id, User user)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
+
+            var r = Request;
+            var th = new TokenHandler();
+            string key = r.Headers.Contains("key") ? r.Headers.GetValues("key").First() : "";
+
+            if (string.IsNullOrEmpty(key))
+                return BadRequest("Access key is required!");
 
             if (user == null)
                 return BadRequest();
 
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            var token = th.GetValidToken(key);
 
-            db.Entry(user).State = EntityState.Modified;
+            if (th.IsTokenValidAdmin(key) || (token != null && token.User.Id == user.Id))
+            {
+                db.Entry(user).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
+                try
                 {
-                    return NotFound();
+                    db.SaveChanges();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!UserExists(id))
+                        return NotFound();
+                    else
+                        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable) { Content = new StringContent("Failed to update database.") });
                 }
-            }
 
-            return StatusCode(HttpStatusCode.NoContent);
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            return Unauthorized();
         }
 
         // POST: api/Users
@@ -80,9 +103,7 @@ namespace PRS.Controllers.API
         public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             if (user == null)
                 return BadRequest();
@@ -100,16 +121,30 @@ namespace PRS.Controllers.API
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
+            var r = Request;
+            var th = new TokenHandler();
+            string key = r.Headers.Contains("key") ? r.Headers.GetValues("key").First() : "";
             User user = db.Users.Find(id);
+
+            if (string.IsNullOrEmpty(key))
+                return BadRequest("Access key is required!");
+
+            var token = th.GetValidToken(key);
+
             if (user == null)
             {
-                return NotFound();
+                if (th.IsTokenValidAdmin(key))
+                    return NotFound();
+            }
+            else if (th.IsTokenValidAdmin(key) || (token != null && token.User.Id == user.Id))
+            {
+                db.Users.Remove(user);
+                db.SaveChanges();
+
+                return Ok(user);
             }
 
-            db.Users.Remove(user);
-            db.SaveChanges();
-
-            return Ok(user);
+            return Unauthorized();
         }
 
         protected override void Dispose(bool disposing)
