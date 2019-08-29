@@ -34,10 +34,6 @@ namespace PRSClassesManagement.UsersManagement
         public DateTime DateofBirth { get; set; }
         [Required]
         public Role Role { get; set; }
-        public bool IsInRole(int id)
-        {
-            return (Role != null && Role.Id == id);
-        }
 
         // Placeholders
         [NotMapped]

@@ -64,7 +64,7 @@ namespace PRS.Controllers
                     return RedirectToAction(ctl, act);
                 }
 
-                if (u.IsInRole(WebUtils.Admin))
+                if (u.Role.Id == 1)
                 {
                     return RedirectToAction("Index", "Admin");
                 }

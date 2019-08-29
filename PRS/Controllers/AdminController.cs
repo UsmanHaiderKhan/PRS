@@ -17,7 +17,7 @@ namespace PRS.Controllers
         public ActionResult GetAllClients()
         {
             User user = (User)Session[WebUtils.CurrentUser];
-            if (!(user != null && user.IsInRole(WebUtils.Admin)))
+            if (!(user != null && user.Role.Id == 1))
                 return RedirectToAction("Login", "Users", new { ctl = "Slider", act = "AddImages" });
             UserHandler h = new UserHandler();
             List<User> u = h.GetUsers();
@@ -27,7 +27,7 @@ namespace PRS.Controllers
         public ActionResult UserDetails(int id)
         {
             User user1 = (User)Session[WebUtils.CurrentUser];
-            if (!(user1 != null && user1.IsInRole(WebUtils.Admin)))
+            if (!(user1 != null && user1.Role.Id == 1))
                 return RedirectToAction("Login", "Users", new { ctl = "Admin", act = "UserDetails" });
 
             UserHandler user = new UserHandler();
