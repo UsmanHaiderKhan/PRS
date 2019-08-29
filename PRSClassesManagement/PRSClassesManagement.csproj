@@ -76,6 +76,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PRSContext.cs" />
+    <Compile Include="PRSContextFactory.cs" />
     <Compile Include="UsersManagement\Contact.cs" />
     <Compile Include="UsersManagement\ContactHandler.cs" />
     <Compile Include="UsersManagement\CountHandler.cs" />
