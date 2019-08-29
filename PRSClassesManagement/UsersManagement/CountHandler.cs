@@ -4,31 +4,19 @@ namespace PRSClassesManagement.UsersManagement
 {
     public class CountHandler
     {
+        private PRSContext db = PRSContext.GetInstance();
+
         public int TotalServices()
         {
-            PRSContext db = PRSContext.GetInstance();
-            using (db)
-            {
-                return (from c in db.Services select c).Count();
-            }
-
+            return (from c in db.Services select c).Count();
         }
         public int GetUserByCount()
         {
-            PRSContext db = PRSContext.GetInstance();
-            using (db)
-            {
-                return (from a in db.Users select a).Count();
-            }
+            return (from a in db.Users select a).Count();
         }
         public int GetMessageCount()
         {
-            PRSContext db = PRSContext.GetInstance();
-            using (db)
-            {
-                return (from c in db.Contacts select c).Count();
-            }
-
+            return (from c in db.Contacts select c).Count();
         }
     }
 }

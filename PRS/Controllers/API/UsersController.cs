@@ -107,7 +107,7 @@ namespace PRS.Controllers.API
 
             if (user == null)
                 return BadRequest();
-
+            
             user.Role = new UserHandler().GetRoleById(2);
             user.Password = HelperMethods.Sha256(user.Password);
             user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
