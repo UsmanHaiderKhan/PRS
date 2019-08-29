@@ -5,7 +5,7 @@ namespace PRSClassesManagement.UsersManagement
 {
     public class ContactHandler
     {
-        PRSContext db = new PRSContext();
+        PRSContext db = PRSContext.GetInstance();
         public List<Contact> GetAllContactsList()
         {
             using (db)

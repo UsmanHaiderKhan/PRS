@@ -9,10 +9,10 @@ namespace PRS.Controllers.API
 {
     public class LoginController : ApiController
     {
-        private PRSContext db = new PRSContext();
+        private PRSContext db = PRSContext.GetInstance();
 
         [AcceptVerbs("POST")]
-        [HttpPost]        
+        [HttpPost]
         public IHttpActionResult GetDataFromUser(LoginViewModel vm)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,5 @@
-﻿using PRS.Models;
+﻿using PRS.Helpers;
+using PRS.Models;
 using PRSClassesManagement;
 using PRSClassesManagement.UsersManagement;
 using System;
@@ -8,7 +9,6 @@ using System.IO;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
-using PRS.Helpers;
 
 namespace PRS.Controllers
 {
@@ -111,7 +111,7 @@ namespace PRS.Controllers
                     user.Role = new Role { Id = 1 };
                 user.Password = HelperMethods.Sha256(user.Password);
                 user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
-                PRSContext db = new PRSContext();
+                PRSContext db = PRSContext.GetInstance();
                 using (db)
                 {
                     db.Users.Add(user);
@@ -148,13 +148,13 @@ namespace PRS.Controllers
         {
             return View();
         }
-        [HttpPost]
 
+        [HttpPost]
         public ActionResult PasswordRecovery(Email data)
         {
             try
             {
-                PRSContext db = new PRSContext();
+                PRSContext db = PRSContext.GetInstance();
                 if (ModelState.IsValid)
                 {
                     User user = new UserHandler().GetUserByEmail(data.email);
@@ -197,8 +197,8 @@ namespace PRS.Controllers
         [HttpPost]
         public ActionResult ProfileSetting(User u)
         {
-            PRSContext db = new PRSContext();
-            
+            PRSContext db = PRSContext.GetInstance();
+
             if (ModelState.IsValid)
             {
                 using (db)
@@ -225,7 +225,7 @@ namespace PRS.Controllers
         [HttpPost]
         public ActionResult ChangePassword(FormCollection formdata, int id)
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 User user = db.Users.Find(id);

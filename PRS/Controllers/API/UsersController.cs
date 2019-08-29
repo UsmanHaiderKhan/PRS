@@ -12,20 +12,21 @@ namespace PRS.Controllers.API
 {
     public class UsersController : ApiController
     {
-        private PRSContext db = new PRSContext();
+        private PRSContext db = PRSContext.GetInstance();
 
         // GET: api/Users
         public IQueryable<User> GetUsers()
         {
-
             return db.Users;
-
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
+            var re = Request;
+            if (re.Headers.Contains("key"))
+                return Json(re.Headers.GetValues("key").First());
             User user = db.Users.Find(id);
             if (user == null)
             {

@@ -31,9 +31,6 @@ namespace PRS.Controllers
                 return RedirectToAction("Login", "Users", new { ctl = "Admin", act = "UserDetails" });
 
             UserHandler user = new UserHandler();
-            //List<User> u = user.GetUsers();
-            //ViewBag.udetails = u;
-            // PRSContext db = new PRSContext();
             List<User> u = user.GetUsersById(id);
             return View(u);
         }
@@ -77,7 +74,7 @@ namespace PRS.Controllers
             }
             try
             {
-                PRSContext db = new PRSContext();
+                PRSContext db = PRSContext.GetInstance();
                 if (ModelState.IsValid)
                 {
                     db.Services.Add(service);
@@ -127,7 +124,7 @@ namespace PRS.Controllers
 
         public int TotalServices()
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 return (from c in db.Services select c).Count();
@@ -136,7 +133,7 @@ namespace PRS.Controllers
 
         public int GetUserByCount()
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 return (from a in db.Users select a).Count();
@@ -145,18 +142,12 @@ namespace PRS.Controllers
 
         public int GetMessageCount()
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 return (from c in db.Contacts select c).Count();
             }
 
         }
-        //public ActionResult GetCount()
-        //{
-        //    CountHandler hc = new CountHandler();
-        //    int count = hc.GetUserByCount();
-        //    return RedirectToAction("Index", "Admin", count);
-        //}
     }
 }

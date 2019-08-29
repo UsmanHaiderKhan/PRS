@@ -6,7 +6,7 @@ namespace PRSClassesManagement.UsersManagement
     {
         public int TotalServices()
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 return (from c in db.Services select c).Count();
@@ -15,7 +15,7 @@ namespace PRSClassesManagement.UsersManagement
         }
         public int GetUserByCount()
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 return (from a in db.Users select a).Count();
@@ -23,7 +23,7 @@ namespace PRSClassesManagement.UsersManagement
         }
         public int GetMessageCount()
         {
-            PRSContext db = new PRSContext();
+            PRSContext db = PRSContext.GetInstance();
             using (db)
             {
                 return (from c in db.Contacts select c).Count();

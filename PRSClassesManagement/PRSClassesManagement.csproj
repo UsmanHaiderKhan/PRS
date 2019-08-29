@@ -82,6 +82,7 @@
     <Compile Include="UsersManagement\Service.cs" />
     <Compile Include="UsersManagement\ServiceHandler.cs" />
     <Compile Include="UsersManagement\Token.cs" />
+    <Compile Include="UsersManagement\TokenHandler.cs" />
     <Compile Include="UsersManagement\User.cs" />
     <Compile Include="UsersManagement\UserHandler.cs" />
   </ItemGroup>
