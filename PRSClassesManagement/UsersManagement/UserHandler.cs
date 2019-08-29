@@ -10,12 +10,17 @@ namespace PRSClassesManagement.UsersManagement
 
         public bool AdminExists()
         {
-            return db.Users.Where(c => c.Role.Id == 1).Count() > 0;
+            return (from c in db.Users
+                    .Include(m => m.Role)
+                    where c.Role.Rank == 1
+                    select c).Count() > 0;
         }
 
         public List<User> GetUsers()
         {
-            var users = (from c in db.Users.Include(m => m.Role) select c).ToList();
+            var users = (from c in db.Users
+                         .Include(m => m.Role)
+                         select c).ToList();
             foreach (var user in users)
             {
                 user.ConfirmPassword = user.Password;
@@ -25,7 +30,8 @@ namespace PRSClassesManagement.UsersManagement
 
         public User GetUser(string email, string password)
         {
-            var user = (from c in db.Users.Include(m => m.Role)
+            var user = (from c in db.Users
+                        .Include(m => m.Role)
                         where c.Email.Equals(email) && c.Password.Equals(password)
                         select c).FirstOrDefault();
             if (user != null) user.ConfirmPassword = user.Password;
@@ -44,7 +50,10 @@ namespace PRSClassesManagement.UsersManagement
 
         public User GetUserByEmail(string email)
         {
-            var user = (from c in db.Users where c.Email == email select c).FirstOrDefault();
+            var user = (from c in db.Users
+                        .Include(x => x.Role)
+                        where c.Email == email
+                        select c).FirstOrDefault();
             if (user != null) user.ConfirmPassword = user.Password;
             return user;
         }

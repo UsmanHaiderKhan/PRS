@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace PRSClassesManagement.UsersManagement
 {
@@ -26,35 +27,42 @@ namespace PRSClassesManagement.UsersManagement
         public bool IsTokenAnyAdmin(int id)
         {
             var t = GetAnyToken(id);
-            return t != null && GetAnyToken(id).User.Role.Id == 1;
+            return t != null && GetAnyToken(id).User.Role.Rank == 1;
         }
 
         public bool IsTokenAnyAdmin(string key)
         {
             var t = GetAnyToken(key);
-            return t != null && t.User.Role.Id == 1;
+            return t != null && t.User.Role.Rank == 1;
         }
 
         public bool IsTokenValidAdmin(int id)
         {
             var t = GetValidToken(id);
-            return t != null && t.User.Role.Id == 1;
+            return t != null && t.User.Role.Rank == 1;
         }
 
         public bool IsTokenValidAdmin(string key)
         {
             var t = GetValidToken(key);
-            return t != null && t.User.Role.Id == 1;
+            return t != null && t.User.Role.Rank == 1;
         }
 
         public List<Token> GetAllTokens()
         {
-            return db.Tokens.ToList();
+            return (from c in db.Tokens
+                    .Include(x => x.User)
+                    .Include(x => x.User.Role)
+                    select c).ToList();
         }
 
         public Token GetAnyToken(int id)
         {
-            return db.Tokens.Find(id);
+            return (from c in db.Tokens
+                    .Include(x => x.User)
+                    .Include(x => x.User.Role)
+                    where c.Id == id
+                    select c).FirstOrDefault();
         }
 
         public Token GetValidToken(string key)
@@ -76,7 +84,11 @@ namespace PRSClassesManagement.UsersManagement
         public Token GetAnyToken(string key)
         {
             if (string.IsNullOrEmpty(key)) return null;
-            return db.Tokens.FirstOrDefault(x => x.Key == key);
+            return (from c in db.Tokens
+                    .Include(x => x.User)
+                    .Include(x => x.User.Role)
+                    where c.Key == key
+                    select c).FirstOrDefault();
         }
 
         public void DeleteToken(int id)

@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201906081927012_Removed ConfirmPassword column from Users table.Designer.cs">
       <DependentUpon>201906081927012_Removed ConfirmPassword column from Users table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908291531445_Made all fields in Token table required.cs" />
+    <Compile Include="Migrations\201908291531445_Made all fields in Token table required.Designer.cs">
+      <DependentUpon>201908291531445_Made all fields in Token table required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PRSContext.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906081927012_Removed ConfirmPassword column from Users table.resx">
       <DependentUpon>201906081927012_Removed ConfirmPassword column from Users table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908291531445_Made all fields in Token table required.resx">
+      <DependentUpon>201908291531445_Made all fields in Token table required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
