@@ -109,7 +109,7 @@ namespace PRS.Controllers
                 if (uh.AdminExists())
                     user.Role = uh.GetRoleById(2);
                 else
-                    user.Role = uh.GetRoleById(2);
+                    user.Role = uh.GetRoleById(1);
                 user.Password = HelperMethods.Sha256(user.Password);
                 user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
                 PRSContext db = PRSContext.GetInstance();
