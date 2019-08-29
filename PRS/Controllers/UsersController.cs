@@ -115,6 +115,7 @@ namespace PRS.Controllers
                 PRSContext db = PRSContext.GetInstance();
                 using (db)
                 {
+                    db.Users.Attach(user);
                     db.Users.Add(user);
                     db.Entry(user.Role).State = EntityState.Unchanged;
                     db.SaveChanges();

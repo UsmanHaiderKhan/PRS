@@ -18,7 +18,7 @@ namespace PRSClassesManagement.UsersManagement
                 Key = HelperMethods.Sha256((user.Id + DateTime.Now.Ticks).ToString()),
                 ExpiryDT = rememberMe ? DateTime.Now.AddDays(7) : DateTime.Now.AddHours(1)
             };
-
+            db.Tokens.Attach(token);
             db.Tokens.Add(token);
             db.SaveChanges();
             return token;

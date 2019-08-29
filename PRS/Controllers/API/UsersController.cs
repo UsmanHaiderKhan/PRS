@@ -114,6 +114,7 @@ namespace PRS.Controllers.API
                 user.Role = uh.GetRoleById(1);
             user.Password = HelperMethods.Sha256(user.Password);
             user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
+            db.Users.Attach(user);
             db.Users.Add(user);
             db.SaveChanges();
 
