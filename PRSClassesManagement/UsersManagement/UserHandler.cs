@@ -15,35 +15,51 @@ namespace PRSClassesManagement.UsersManagement
 
         public List<User> GetUsers()
         {
-            return (from c in db.Users.Include(m => m.Role) select c).ToList();
+            var users = (from c in db.Users.Include(m => m.Role) select c).ToList();
+            foreach (var user in users)
+            {
+                user.ConfirmPassword = user.Password;
+            }
+            return users;
         }
 
         public User GetUser(string email, string password)
         {
-            return (from c in db.Users.Include(m => m.Role)
-                    where c.Email.Equals(email) && c.Password.Equals(password)
-                    select c).FirstOrDefault();
+            var user = (from c in db.Users.Include(m => m.Role)
+                        where c.Email.Equals(email) && c.Password.Equals(password)
+                        select c).FirstOrDefault();
+            if (user != null) user.ConfirmPassword = user.Password;
+            return user;
         }
 
         public User GetUserById(int id)
         {
-            return (from c in db.Users
-                    .Include(x => x.Role)
-                    where c.Id == id
-                    select c).FirstOrDefault();
+            var user = (from c in db.Users
+                        .Include(x => x.Role)
+                        where c.Id == id
+                        select c).FirstOrDefault();
+            if (user != null) user.ConfirmPassword = user.Password;
+            return user;
         }
 
         public User GetUserByEmail(string email)
         {
-            return (from c in db.Users where c.Email == email select c).FirstOrDefault();
+            var user = (from c in db.Users where c.Email == email select c).FirstOrDefault();
+            if (user != null) user.ConfirmPassword = user.Password;
+            return user;
         }
 
         public List<User> GetUsersById(int id)
         {
-            return (from c in db.Users
-                    .Include(x => x.Role)
-                    where c.Id == id
-                    select c).ToList();
+            var users = (from c in db.Users
+                        .Include(x => x.Role)
+                         where c.Id == id
+                         select c).ToList();
+            foreach (var user in users)
+            {
+                user.ConfirmPassword = user.Password;
+            }
+            return users;
         }
 
         public void GetDeleteUsers(int id)
@@ -55,8 +71,7 @@ namespace PRSClassesManagement.UsersManagement
 
         public Role GetRoleById(int id)
         {
-            Role u = db.Roles.Find(id);
-            return u;
+            return db.Roles.Find(id);
         }
     }
 }

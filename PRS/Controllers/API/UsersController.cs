@@ -98,7 +98,7 @@ namespace PRS.Controllers.API
         }
 
         // POST: api/Users
-        // DateofBirth should be in format: yyyy-MM-dd
+        // Note: DateofBirth should be in format: yyyy-MM-dd
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
@@ -107,11 +107,11 @@ namespace PRS.Controllers.API
 
             if (user == null)
                 return BadRequest();
-
-            if (new UserHandler().AdminExists())
-                user.Role = new UserHandler().GetRoleById(2);
+            var uh = new UserHandler();
+            if (uh.AdminExists())
+                user.Role = uh.GetRoleById(2);
             else
-                user.Role = new UserHandler().GetRoleById(1);
+                user.Role = uh.GetRoleById(1);
             user.Password = HelperMethods.Sha256(user.Password);
             user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
             db.Users.Add(user);

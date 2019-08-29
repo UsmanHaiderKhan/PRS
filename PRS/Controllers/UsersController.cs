@@ -105,10 +105,11 @@ namespace PRS.Controllers
                         file.SaveAs(path);
                     }
                 }
-                if (new UserHandler().AdminExists())
-                    user.Role = new UserHandler().GetRoleById(2);
+                var uh = new UserHandler();
+                if (uh.AdminExists())
+                    user.Role = uh.GetRoleById(2);
                 else
-                    user.Role = new UserHandler().GetRoleById(2);
+                    user.Role = uh.GetRoleById(2);
                 user.Password = HelperMethods.Sha256(user.Password);
                 user.ConfirmPassword = HelperMethods.Sha256(user.ConfirmPassword);
                 PRSContext db = PRSContext.GetInstance();
